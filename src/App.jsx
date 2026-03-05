@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import { supabase } from "./services/supabaseClient";
+import { supabase, supabaseConfigError } from "./services/supabaseClient";
 
 function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
@@ -48,6 +48,18 @@ function ProtectedRoute({ children }) {
 }
 
 function App() {
+  if (supabaseConfigError) {
+    return (
+      <main className="page-loader">
+        <div className="config-error-card">
+          <h2>Configuration Error</h2>
+          <p>{supabaseConfigError}</p>
+          <p>For Vercel, add these variables and redeploy.</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />

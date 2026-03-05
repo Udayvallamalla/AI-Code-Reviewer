@@ -43,6 +43,25 @@ a {
   min-height: 100vh;
 }
 
+.config-error-card {
+  width: min(620px, 92%);
+  border: 1px solid #7f1d1d;
+  background: rgba(69, 10, 10, 0.35);
+  color: #fee2e2;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.config-error-card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.config-error-card p {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
 .auth-layout {
   min-height: 100vh;
   display: grid;
