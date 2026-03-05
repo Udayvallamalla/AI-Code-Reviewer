@@ -1,13 +1,22 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:4000" : "");
 
 async function request(path, payload) {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  if (!API_BASE_URL) {
+    throw new Error("Missing VITE_API_URL in production environment.");
+  }
+
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    throw new Error(`Unable to reach API at ${API_BASE_URL}. Check backend deployment and CORS.`);
+  }
 
   const contentType = response.headers.get("content-type") || "";
   const raw = await response.text();
