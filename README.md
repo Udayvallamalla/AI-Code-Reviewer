@@ -58,6 +58,8 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_API_URL=http://localhost:4000
 ```
 
+You can copy from `.env.example`.
+
 ### Backend (`server/.env`)
 
 ```env
@@ -95,6 +97,18 @@ npm run server
 ```bash
 npm run dev
 ```
+
+## Vercel Deployment
+
+In Vercel project settings, add these environment variables:
+
+```env
+VITE_SUPABASE_URL=https://mubnsqeyrbzphrnjfmxa.supabase.co
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_API_URL=https://your-backend-service-url
+```
+
+Then redeploy the project.
 
 ## Available Scripts
 
